@@ -51,3 +51,15 @@ def increment_visits(slug):
             "UPDATE urls SET visits = visits + 1 WHERE slug = %s",
             (slug,)
         )
+
+
+def get_stats(slug):
+    """
+    Return (visits, created_at) for a given slug, or None if it doesn't exist.
+    """
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT visits, created_at FROM urls WHERE slug = %s",
+            (slug,)
+        )
+        return cur.fetchone()
