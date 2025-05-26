@@ -21,10 +21,19 @@ def init_db():
 
 def create_slug(target_url):
     """
-    Generate a unique 6-character slug and store it with its target URL.
-    - Tries random slugs until an INSERT succeeds (ON CONFLICT DO NOTHING avoids duplicates).
-    - Returns the slug string on success.
+    Return an existing slug for target_url if one exists;
+    otherwise generate a new unique slug, store it, and return it.
     """
+
+    # Option 1: Look for an existing row (checking if it's a duplicate)
+    with conn.cursor() as cur:
+        cur.execute("SELECT slug FROM urls WHERE target = %s", (target_url,))
+        row = cur.fetchone()
+        if row:
+            return row[0]
+
+
+    # Option 2: If no existing row exists matching the link, give a new slug/code
     while True:
         # Build a random 6-char string from letters+digits
         slug = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
