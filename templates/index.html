@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-    <h1>Hello</h1>
-</body>
+{% extends "layout.html" %}
 
-</html>
+{% block body %}
+
+<main>
+  <section class="welcome">
+    <div class="welcome__container">
+      <div class="welcome__header">
+        <h1>Welcome to the TAMID at UCLA URL Shortener!</h1>
+      </div>
+      <div class="welcome__box">
+          <p class="welcome-content">Please paste the URL you wish to shorten below:</p>  
+          <div class="input__container">
+              <input type="url" id="url-input" placeholder="https://example.com" />
+              <button type="submit" class="shorten-btn" id="shorten-button">Shorten URL</button>
+          </div>
+      </div>
+      
+      <!-- Results container for shortened URLs -->
+      <div id="results-container">
+          <!-- Shortened URL boxes will be dynamically inserted here -->
+      </div>
+    </div>
+  </section>
+</main>
+
+
+{% endblock %}

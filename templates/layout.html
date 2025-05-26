@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TAMID UCLA URL Shortener</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}" />
+  </head>
+  
+  <body>
+    <header>
+        <nav class="navbar" role="navigation" aria-label="Main Navigation">
+            <div class="navbar__container">
+                <a href="/" id="navbar-logo">
+                    <img id="logo-img" src="{{ url_for('static', filename='images/TAMIDLogo_1.png') }}" alt="TAMID Logo"/>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    {% block body %}{% endblock %}
+    
+
+    <footer class="footer">
+      <div class="footer__container">
+          <!-- Brand Section -->
+          <div class="footer__brand">
+              <img id="footer-logo" src="{{ url_for('static', filename='images/TAMIDLogo_2.png') }}" alt="TAMID Logo" />
+          </div>
+          
+          <!-- Bottom Section with dot separators -->
+          <div class="footer__bottom">
+              <span class="footer__copyright">© 2025 TAMID at UCLA</span>
+              <span class="footer__dot">•</span>
+              <a href="/" class="footer__link">Home</a>
+              <span class="footer__dot">•</span>
+              <a href="https://github.com/TAMID-at-UCLA" class="footer__link" target="_blank">GitHub</a>
+              <span class="footer__dot">•</span>
+              <a href="{{ url_for('creators') }}" class="footer__link">Creators</a>
+          </div>
+      </div>
+    </footer>
+
+        <!-- Script tag after the content -->
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+  </body>
+
+</html>
+
+

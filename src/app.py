@@ -72,6 +72,10 @@ def stats(slug):
         created_at=created_at.isoformat()
     ), 200
 
+@app.route('/creators')
+def creators():
+    return render_template('creators.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=PORT, debug=True)
