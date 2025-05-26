@@ -1,7 +1,7 @@
 /* ===========================================
 GOOGLE FONTS IMPORT
 =========================================== */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* ===========================================
     GLOBAL RESET & BASE STYLES
@@ -14,7 +14,7 @@ GOOGLE FONTS IMPORT
 }
 
 /* Flexbox layout for sticky footer */
-    html, body {
+html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -45,7 +45,7 @@ main {
     border-bottom: 2px solid black; /* Bottom border for separation */
 }
 
-/* Logo container */
+/* Logo container with hover effects */
 #navbar-logo {
     display: flex;
     align-items: center;
@@ -54,6 +54,21 @@ main {
     margin: auto 0;
     position: relative;  
     z-index: 2;
+    cursor: pointer; /* Show pointer cursor to indicate clickability */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    border-radius: 8px; /* Rounded corners for hover background */
+    padding: 8px; /* Padding for hover background */
+}
+
+/* Logo hover effect */
+#navbar-logo:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: rgba(67, 181, 230, 0.1); /* Light blue background on hover */
+}
+
+/* Logo active/pressed effect */
+#navbar-logo:active {
+    transform: scale(0.98); /* Slightly shrink when clicked */
 }
 
 /* Logo image styling */
@@ -61,6 +76,12 @@ main {
     height: 70px;  
     width: auto;
     display: block;
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+/* Logo image hover effect */
+#navbar-logo:hover img {
+    opacity: 0.9; /* Slight transparency on hover */
 }
 
 /* ===========================================
@@ -346,7 +367,7 @@ main {
 }
 
 /* ===========================================
-    CREATORS PAGE STYLES
+    CREATORS PAGE STYLES - WINDOWED LAYOUT
     =========================================== */
 
 /* Main creators page section */
@@ -387,48 +408,52 @@ main {
     margin: 0 auto;
 }
 
-/* Grid layout for creator cards */
+/* Grid layout for creator cards - Windowed Pattern */
 .creators__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 column grid */
-    gap: 40px;
+    grid-template-columns: repeat(5, 1fr); /* 5 column grid for windowed layout */
+    gap: 30px;
     max-width: 1000px;
     margin: 0 auto;
 }
 
-/* Specific positioning for 2-3-2 symmetrical layout */
+/* Windowed positioning pattern:
+    Row 1:     [1] [2]
+    Row 2: [3] [4] [5]
+    Row 3:     [6] [7]
+*/
 .creator-card:nth-child(1) {
-    grid-column: 1 / 2;
+    grid-column: 2 / 3; /* Column 2 */
     grid-row: 1;
 }
 
 .creator-card:nth-child(2) {
-    grid-column: 3 / 4;
+    grid-column: 4 / 5; /* Column 4 */
     grid-row: 1;
 }
 
 .creator-card:nth-child(3) {
-    grid-column: 1 / 2;
+    grid-column: 1 / 2; /* Column 1 */
     grid-row: 2;
 }
 
 .creator-card:nth-child(4) {
-    grid-column: 2 / 3;
+    grid-column: 3 / 4; /* Column 3 (center) */
     grid-row: 2;
 }
 
 .creator-card:nth-child(5) {
-    grid-column: 3 / 4;
+    grid-column: 5 / 6; /* Column 5 */
     grid-row: 2;
 }
 
 .creator-card:nth-child(6) {
-    grid-column: 1 / 2;
+    grid-column: 2 / 3; /* Column 2 */
     grid-row: 3;
 }
 
 .creator-card:nth-child(7) {
-    grid-column: 3 / 4;
+    grid-column: 4 / 5; /* Column 4 */
     grid-row: 3;
 }
 
@@ -436,7 +461,7 @@ main {
 .creator-card {
     background: white;
     border-radius: 20px;
-    padding: 30px;
+    padding: 25px; /* Reduced padding to give more space to image */
     text-align: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -463,13 +488,13 @@ main {
 
 /* Container for creator profile image */
 .creator-image {
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Reduced margin to give more space to image */
 }
 
-/* Creator profile image styling */
+/* Creator profile image styling - Bigger images */
 .creator-image img {
-    width: 120px;
-    height: 120px;
+    width: 140px; /* Increased from 120px */
+    height: 140px; /* Increased from 120px */
     border-radius: 12px; /* Rounded corners for square images */
     object-fit: cover; /* Maintain aspect ratio */
     border: 4px solid #f8f9fa; /* Light border */
@@ -488,11 +513,11 @@ main {
     text-align: center;
 }
 
-/* Creator name styling (both linked and non-linked) */
+/* Creator name styling - Smaller font size */
 .creator-name {
     display: block;
     color: #2c3e50; /* Dark blue-gray */
-    font-size: 1.3rem;
+    font-size: 1.1rem; /* Reduced from 1.3rem */
     font-weight: 600;
     text-decoration: none;
     margin-bottom: 0;
@@ -707,7 +732,7 @@ main {
     /* Creators page tablet adjustments */
     .creators__grid {
         grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
-        gap: 30px;
+        gap: 25px;
     }
     
     /* Reset grid positioning for tablet - use auto flow */
@@ -726,18 +751,18 @@ main {
     }
     
     .creator-card {
-        padding: 25px 20px;
+        padding: 20px 15px;
         margin: 0 10px;
     }
     
     .creator-image img {
-        width: 100px;
-        height: 100px;
+        width: 110px; /* Slightly smaller for tablet */
+        height: 110px;
         border-radius: 10px;
     }
     
     .creator-name {
-        font-size: 1.2rem;
+        font-size: 1rem; /* Smaller for tablet */
     }
     
     /* Footer adjustments */
@@ -876,7 +901,7 @@ main {
     
     .creators__grid {
         grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 30px;
+        gap: 25px;
         padding: 0 10px;
     }
     
@@ -891,13 +916,13 @@ main {
     }
     
     .creator-image img {
-        width: 80px;
-        height: 80px;
+        width: 100px; /* Mobile size */
+        height: 100px;
         border-radius: 8px;
     }
     
     .creator-name {
-        font-size: 1.1rem;
+        font-size: 0.95rem; /* Smaller for mobile */
     }
     
     /* Footer mobile adjustments - stack vertically */
