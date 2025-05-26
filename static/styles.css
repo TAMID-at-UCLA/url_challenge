@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* ===========================================
+GOOGLE FONTS IMPORT
+=========================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* ===========================================
+    GLOBAL RESET & BASE STYLES
+    =========================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,34 +13,39 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html, body {
+/* Flexbox layout for sticky footer */
+    html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    background: #43b5e6;
+    background: #43b5e6; /* Main blue background */
 }
 
+/* Main content area - takes up remaining space */
 main {
     flex: 1;
 }
 
-/* Navbar */
+/* ===========================================
+    NAVIGATION BAR
+    =========================================== */
 .navbar__container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center the logo */
     align-items: center;
     height: 100px;
-    z-index: 1000;
+    z-index: 1000; /* Keep navbar above other content */
     width: 100%;
     margin: 0 auto;
     padding: 0 50px;
-    position: fixed;
+    position: fixed; /* Stick to top of page */
     background: #fff;
     padding-left: 40px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid black; /* Bottom border for separation */
 }
 
+/* Logo container */
 #navbar-logo {
     display: flex;
     align-items: center;
@@ -45,23 +56,27 @@ main {
     z-index: 2;
 }
 
+/* Logo image styling */
 #navbar-logo img {
     height: 70px;  
     width: auto;
     display: block;
 }
 
-/* Welcome Section */
+/* ===========================================
+    WELCOME/HOME PAGE SECTION
+    =========================================== */
 .welcome {
-    background: #43b5e6;
-    min-height: 100vh;
+    background: #43b5e6; /* Blue background matching theme */
+    min-height: 100vh; /* Full viewport height */
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Align content to top */
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 120px; /* Account for fixed navbar */
     padding-bottom: 40px;
 }
 
+/* Main container for welcome content */
 .welcome__container {
     max-width: 1000px;
     width: 100%;
@@ -69,11 +84,13 @@ main {
     text-align: center;
 }
 
+/* Header section with title */
 .welcome__header {
     margin-top: 60px;
     margin-bottom: 50px;
 }
 
+/* Main page title */
 .welcome__header h1 {
     color: white;
     font-size: 2.5rem;
@@ -82,6 +99,7 @@ main {
     margin-bottom: 20px;
 }
 
+/* White container box for URL shortener form */
 .welcome__box {
     background: white;
     border-radius: 12px;
@@ -91,6 +109,7 @@ main {
     margin: 0 auto;
 }
 
+/* Text content inside the white box */
 .welcome__content, .welcome-content {
     font-size: 1.3rem;
     color: #333;
@@ -98,16 +117,18 @@ main {
     font-weight: 500;
 }
 
+/* Container for input field and button */
 .input__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Side by side layout */
     gap: 12px;
     width: 100%;
-    align-items: stretch;
+    align-items: stretch; /* Make button same height as input */
 }
 
+/* URL input field */
 #url-input {
-    flex: 1;
+    flex: 1; /* Take up remaining space */
     padding: 15px 20px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -116,14 +137,16 @@ main {
     transition: border-color 0.3s ease;
 }
 
+/* Input field focus state */
 #url-input:focus {
     outline: none;
-    border-color: #43b5e6;
-    box-shadow: 0 0 0 3px rgba(67, 181, 230, 0.1);
+    border-color: #43b5e6; /* Blue border when focused */
+    box-shadow: 0 0 0 3px rgba(67, 181, 230, 0.1); /* Subtle glow effect */
 }
 
+/* Shorten URL button */
 .shorten-btn {
-    background: #43b5e6;
+    background: #43b5e6; /* Blue background */
     color: white;
     border: none;
     padding: 15px 25px;
@@ -137,16 +160,22 @@ main {
     min-width: 120px;
 }
 
+/* Button hover effects */
 .shorten-btn:hover {
-    background: #3a9fd4;
-    transform: translateY(-2px);
+    background: #3a9fd4; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect */
 }
 
+/* Button active/pressed state */
 .shorten-btn:active {
-    transform: translateY(0);
+    transform: translateY(0); /* Reset lift effect */
 }
 
-/* Results Container */
+/* ===========================================
+    SHORTENED URL RESULTS SECTION
+    =========================================== */
+
+/* Container for all result boxes */
 #results-container {
     margin-top: 30px;
     display: flex;
@@ -154,7 +183,7 @@ main {
     gap: 20px;
 }
 
-/* Individual Result Box */
+/* Individual result box for each shortened URL */
 .result-box {
     background: white;
     border-radius: 12px;
@@ -163,11 +192,12 @@ main {
     max-width: 700px;
     margin: 0 auto;
     width: 100%;
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: slideIn 0.4s ease forwards;
+    opacity: 0; /* Start invisible for animation */
+    transform: translateY(-20px); /* Start position for slide-in */
+    animation: slideIn 0.4s ease forwards; /* Slide-in animation */
 }
 
+/* Slide-in animation for new result boxes */
 @keyframes slideIn {
     to {
         opacity: 1;
@@ -175,52 +205,60 @@ main {
     }
 }
 
+/* Content layout inside each result box */
 .result-content {
     display: flex;
     align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
+/* Left section with URLs */
 .url-section {
     flex: 1;
     min-width: 300px;
     text-align: left;
 }
 
+/* Shortened URL display */
 .short-url {
     margin-bottom: 8px;
 }
 
+/* Shortened URL link styling */
 .short-url a {
-    color: #43b5e6;
+    color: #43b5e6; /* Blue link color */
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
-    word-break: break-all;
+    word-break: break-all; /* Break long URLs */
 }
 
+/* Shortened URL hover effect */
 .short-url a:hover {
     text-decoration: underline;
 }
 
+/* Original URL display */
 .original-url {
-    color: #666;
+    color: #666; /* Gray text */
     font-size: 0.9rem;
-    word-break: break-all;
+    word-break: break-all; /* Break long URLs */
     margin: 0;
 }
 
+/* Right section with stats and copy button */
 .stats-section {
     display: flex;
     align-items: center;
     gap: 15px;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Don't shrink this section */
 }
 
+/* Visit counter badge */
 .visits-count {
-    background: #f0f9ff;
-    color: #43b5e6;
+    background: #f0f9ff; /* Light blue background */
+    color: #43b5e6; /* Blue text */
     padding: 8px 12px;
     border-radius: 6px;
     font-weight: 500;
@@ -228,8 +266,9 @@ main {
     white-space: nowrap;
 }
 
+/* Copy URL button */
 .copy-btn {
-    background: #43b5e6;
+    background: #43b5e6; /* Blue background */
     color: white;
     border: none;
     padding: 10px 16px;
@@ -241,34 +280,40 @@ main {
     white-space: nowrap;
 }
 
+/* Copy button hover effect */
 .copy-btn:hover {
-    background: #3a9fd4;
-    transform: scale(1.05);
+    background: #3a9fd4; /* Darker blue */
+    transform: scale(1.05); /* Slight scale up */
 }
 
+/* Copy button success state (when copied) */
 .copy-btn.copied {
-    background: #22c55e;
+    background: #22c55e; /* Green background */
     transform: scale(1.05);
 }
 
-/* Loading state */
+/* Loading state for shorten button */
 .shorten-btn.loading {
     opacity: 0.7;
     cursor: not-allowed;
 }
 
-/* Error message */
+/* Error message styling */
 .error-message {
-    background: #fee2e2;
-    color: #dc2626;
+    background: #fee2e2; /* Light red background */
+    color: #dc2626; /* Red text */
     padding: 12px 16px;
     border-radius: 8px;
     margin-top: 15px;
     font-size: 0.9rem;
-    display: none;
+    display: none; /* Hidden by default */
 }
 
-/* Previous Links Separator */
+/* ===========================================
+    PREVIOUS LINKS SEPARATOR
+    =========================================== */
+
+/* Separator between newest and older links */
 .previous-links-separator {
     display: flex;
     align-items: center;
@@ -278,51 +323,220 @@ main {
     margin-right: auto;
 }
 
+/* Lines on either side of separator text */
 .previous-links-separator::before,
 .previous-links-separator::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
 }
 
+/* "Previous Links" text styling */
 .previous-links-separator span {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1); /* Translucent background */
     color: white;
     padding: 8px 20px;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
     margin: 0 15px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Blur effect behind text */
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Footer Styles */
-.footer {
-    background: #ffffff72;
-    color: white;
-    padding: 20px 0 15px 0;
-    margin-top: auto;
+/* ===========================================
+    CREATORS PAGE STYLES
+    =========================================== */
+
+/* Main creators page section */
+.creators {
+    background: #43b5e6; /* Blue background matching theme */
+    min-height: 100vh;
+    padding-top: 120px; /* Account for fixed navbar */
+    padding-bottom: 60px;
 }
 
+/* Container for creators page content */
+.creators__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header section with title and description */
+.creators__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Creators page main title */
+.creators__header h1 {
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Creators page subtitle */
+.creators__header p {
+    color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    font-size: 1.2rem;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Grid layout for creator cards */
+.creators__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 column grid */
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Specific positioning for 2-3-2 symmetrical layout */
+.creator-card:nth-child(1) {
+    grid-column: 1 / 2;
+    grid-row: 1;
+}
+
+.creator-card:nth-child(2) {
+    grid-column: 3 / 4;
+    grid-row: 1;
+}
+
+.creator-card:nth-child(3) {
+    grid-column: 1 / 2;
+    grid-row: 2;
+}
+
+.creator-card:nth-child(4) {
+    grid-column: 2 / 3;
+    grid-row: 2;
+}
+
+.creator-card:nth-child(5) {
+    grid-column: 3 / 4;
+    grid-row: 2;
+}
+
+.creator-card:nth-child(6) {
+    grid-column: 1 / 2;
+    grid-row: 3;
+}
+
+.creator-card:nth-child(7) {
+    grid-column: 3 / 4;
+    grid-row: 3;
+}
+
+/* Individual creator card styling */
+.creator-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Creator card hover effect */
+.creator-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Blue accent line at top of each card */
+.creator-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #43b5e6, #2980b9); /* Blue gradient */
+}
+
+/* Container for creator profile image */
+.creator-image {
+    margin-bottom: 25px;
+}
+
+/* Creator profile image styling */
+.creator-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px; /* Rounded corners for square images */
+    object-fit: cover; /* Maintain aspect ratio */
+    border: 4px solid #f8f9fa; /* Light border */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Image hover effect when card is hovered */
+.creator-card:hover .creator-image img {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+
+/* Container for creator name */
+.creator-info {
+    text-align: center;
+}
+
+/* Creator name styling (both linked and non-linked) */
+.creator-name {
+    display: block;
+    color: #2c3e50; /* Dark blue-gray */
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 0;
+    transition: color 0.3s ease;
+}
+
+/* Creator name hover effect (for linked names) */
+.creator-name:hover {
+    color: #43b5e6; /* Blue color on hover */
+    text-decoration: underline;
+}
+
+/* ===========================================
+    FOOTER STYLES
+    =========================================== */
+
+/* Main footer section */
+.footer {
+    background: #ffffff72; /* Semi-transparent white */
+    color: white;
+    padding: 20px 0 15px 0;
+    margin-top: auto; /* Stick to bottom with flexbox */
+}
+
+/* Footer content container */
 .footer__container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Horizontal layout */
     align-items: center;
-    justify-content: center;
-    gap: 15px;
+    justify-content: center; /* Center everything */
+    gap: 15px; /* Space between logo and text */
 }
 
+/* Footer logo container */
 .footer__brand {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Don't shrink logo */
 }
 
+/* Footer logo image */
 #footer-logo {
     height: 40px;
     width: auto;
@@ -330,10 +544,12 @@ main {
     transition: opacity 0.3s ease;
 }
 
+/* Footer logo hover effect */
 #footer-logo:hover {
     opacity: 1;
 }
 
+/* Footer text and links container */
 .footer__bottom {
     display: flex;
     align-items: center;
@@ -344,34 +560,39 @@ main {
     text-align: center;
 }
 
+/* Copyright text */
 .footer__copyright {
-    color: #000;
+    color: #000; /* Black text */
     margin: 0;
     white-space: nowrap;
 }
 
+/* Dot separators between footer links */
 .footer__dot {
-    color: #000;
+    color: #000; /* Black dots */
     margin: 0 12px;
     font-weight: bold;
 }
 
+/* Footer links styling */
 .footer__link {
-    color: #000;
+    color: #000; /* Black text */
     text-decoration: none;
     transition: color 0.3s ease;
     white-space: nowrap;
 }
 
+/* Footer link hover effect */
 .footer__link:hover {
-    color: #2980b9;
+    color: #2980b9; /* Blue on hover */
     text-decoration: underline;
 }
 
 /* ===========================================
-   RESPONSIVE DESIGN - TABLET (768px - 1024px)
-   =========================================== */
+    RESPONSIVE DESIGN - LARGE TABLET (768px - 1024px)
+    =========================================== */
 @media screen and (max-width: 1024px) {
+    /* Adjust welcome section for smaller screens */
     .welcome__container {
         max-width: 900px;
         padding: 0 30px;
@@ -381,6 +602,7 @@ main {
         font-size: 2.2rem;
     }
     
+    /* Adjust navbar padding */
     .navbar__container {
         padding: 0 30px;
         padding-left: 20px;
@@ -388,23 +610,23 @@ main {
 }
 
 /* ===========================================
-   RESPONSIVE DESIGN - TABLET (768px)
-   =========================================== */
+    RESPONSIVE DESIGN - TABLET (768px)
+    =========================================== */
 @media screen and (max-width: 768px) {
-    /* Navbar */
+    /* Navbar adjustments */
     .navbar__container {
-        height: 80px;
+        height: 80px; /* Shorter navbar */
         padding: 0 20px;
         padding-left: 15px;
     }
     
     #navbar-logo img {
-        height: 55px;
+        height: 55px; /* Smaller logo */
     }
     
-    /* Welcome Section */
+    /* Welcome section adjustments */
     .welcome {
-        padding-top: 100px;
+        padding-top: 100px; /* Less top padding */
         padding-bottom: 30px;
     }
     
@@ -432,7 +654,7 @@ main {
         margin-bottom: 18px;
     }
     
-    /* Input Container */
+    /* Stack input and button vertically on tablet */
     .input__container {
         flex-direction: column;
         gap: 12px;
@@ -443,7 +665,7 @@ main {
         padding: 15px 20px;
     }
     
-    /* Results */
+    /* Results section adjustments */
     #results-container {
         margin-top: 25px;
         gap: 15px;
@@ -454,6 +676,7 @@ main {
         margin: 0 10px;
     }
     
+    /* Stack result content vertically */
     .result-content {
         flex-direction: column;
         align-items: stretch;
@@ -470,7 +693,7 @@ main {
         gap: 10px;
     }
     
-    /* Previous Links Separator */
+    /* Previous links separator adjustments */
     .previous-links-separator {
         margin: 20px 0 15px 0;
     }
@@ -481,7 +704,43 @@ main {
         margin: 0 10px;
     }
     
-    /* Footer */
+    /* Creators page tablet adjustments */
+    .creators__grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+        gap: 30px;
+    }
+    
+    /* Reset grid positioning for tablet - use auto flow */
+    .creator-card:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    
+    .creators__header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .creators__header p {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    .creator-card {
+        padding: 25px 20px;
+        margin: 0 10px;
+    }
+    
+    .creator-image img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+    
+    .creator-name {
+        font-size: 1.2rem;
+    }
+    
+    /* Footer adjustments */
     .footer {
         padding: 15px 0 10px 0;
     }
@@ -504,21 +763,21 @@ main {
 }
 
 /* ===========================================
-   RESPONSIVE DESIGN - MOBILE (480px)
-   =========================================== */
+    RESPONSIVE DESIGN - MOBILE (480px)
+    =========================================== */
 @media screen and (max-width: 480px) {
-    /* Navbar */
+    /* Navbar mobile adjustments */
     .navbar__container {
-        height: 70px;
+        height: 70px; /* Even shorter navbar */
         padding: 0 15px;
         padding-left: 10px;
     }
     
     #navbar-logo img {
-        height: 45px;
+        height: 45px; /* Smaller logo */
     }
     
-    /* Welcome Section */
+    /* Welcome section mobile adjustments */
     .welcome {
         padding-top: 85px;
         padding-bottom: 25px;
@@ -550,7 +809,7 @@ main {
         margin-bottom: 15px;
     }
     
-    /* Input */
+    /* Input field mobile adjustments */
     #url-input {
         padding: 12px 15px;
         font-size: 0.9rem;
@@ -561,7 +820,7 @@ main {
         font-size: 0.9rem;
     }
     
-    /* Results */
+    /* Results mobile adjustments */
     #results-container {
         margin-top: 20px;
         gap: 12px;
@@ -595,7 +854,7 @@ main {
         font-size: 0.8rem;
     }
     
-    /* Previous Links Separator */
+    /* Previous links separator mobile adjustments */
     .previous-links-separator {
         margin: 15px 0 10px 0;
     }
@@ -606,10 +865,50 @@ main {
         margin: 0 8px;
     }
     
-    /* Footer - Stack Vertically */
+    /* Creators page mobile adjustments */
+    .creators__header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .creators__header p {
+        font-size: 0.9rem;
+    }
+    
+    .creators__grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 30px;
+        padding: 0 10px;
+    }
+    
+    /* Reset grid positioning for mobile - use auto flow */
+    .creator-card:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+    
+    .creator-card {
+        padding: 20px 15px;
+    }
+    
+    .creator-image img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+    }
+    
+    .creator-name {
+        font-size: 1.1rem;
+    }
+    
+    /* Footer mobile adjustments - stack vertically */
+    .footer {
+        padding: 15px 0 25px 0; /* Extra bottom padding for mobile */
+    }
+    
     .footer__container {
-        flex-direction: column;
+        flex-direction: column; /* Stack logo and text */
         gap: 8px;
+        margin-bottom: 10px;
     }
     
     .footer__bottom {
@@ -618,7 +917,7 @@ main {
     }
     
     .footer__dot {
-        display: none;
+        display: none; /* Hide dots on mobile */
     }
     
     .footer__copyright {
@@ -638,9 +937,10 @@ main {
 }
 
 /* ===========================================
-   RESPONSIVE DESIGN - EXTRA SMALL (360px)
-   =========================================== */
+    RESPONSIVE DESIGN - EXTRA SMALL (360px)
+    =========================================== */
 @media screen and (max-width: 360px) {
+    /* Extra small screen adjustments */
     .welcome__header h1 {
         font-size: 1.4rem;
     }
