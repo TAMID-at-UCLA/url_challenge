@@ -2,7 +2,7 @@ import os
 import random
 import string
 from flask import Flask, render_template, request, redirect, jsonify
-from db import init_db, create_slug, get_target, increment_visits, get_stats
+from src.db import init_db, create_slug, get_target, increment_visits, get_stats
 from dotenv import load_dotenv
 
 # Load environment variables from .env (DATABASE_URL, BASE_URL, PORT, etc.)
