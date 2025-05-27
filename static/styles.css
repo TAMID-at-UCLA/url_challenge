@@ -385,10 +385,11 @@ main {
     padding: 0 20px;
 }
 
-/* Header section with title and description */
+/* Header section with title and description - MATCHED TO HOME PAGE */
 .creators__header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-top: 60px; /* Added to match home page spacing */
+    margin-bottom: 50px; /* Matched to home page */
 }
 
 /* Creators page main title */
@@ -412,7 +413,7 @@ main {
 .creators__grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 column grid for windowed layout */
-    gap: 30px;
+    gap: 20px; /* Reduced from 30px to decrease side spacing */
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -457,16 +458,17 @@ main {
     grid-row: 3;
 }
 
-/* Individual creator card styling */
+/* Individual creator card styling - WIDER FOR ONE-LINE NAMES */
 .creator-card {
     background: white;
     border-radius: 20px;
-    padding: 25px; /* Reduced padding to give more space to image */
+    padding: 25px 35px; /* Increased horizontal padding from 25px to 35px */
     text-align: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-width: 200px; /* Added minimum width for wider boxes */
 }
 
 /* Creator card hover effect */
@@ -486,9 +488,12 @@ main {
     background: linear-gradient(135deg, #43b5e6, #2980b9); /* Blue gradient */
 }
 
-/* Container for creator profile image */
+/* Container for creator profile image - CENTERED */
 .creator-image {
-    margin-bottom: 20px; /* Reduced margin to give more space to image */
+    margin-bottom: 20px;
+    display: flex; /* Added to center image */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
 
 /* Creator profile image styling - Bigger images */
@@ -513,7 +518,7 @@ main {
     text-align: center;
 }
 
-/* Creator name styling - Smaller font size */
+/* Creator name styling - Smaller font size, ONE LINE */
 .creator-name {
     display: block;
     color: #2c3e50; /* Dark blue-gray */
@@ -522,6 +527,9 @@ main {
     text-decoration: none;
     margin-bottom: 0;
     transition: color 0.3s ease;
+    white-space: nowrap; /* Prevent line wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ... if text is too long */
 }
 
 /* Creator name hover effect (for linked names) */
@@ -732,13 +740,18 @@ main {
     /* Creators page tablet adjustments */
     .creators__grid {
         grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
-        gap: 25px;
+        gap: 20px; /* Reduced gap for tablet too */
     }
     
     /* Reset grid positioning for tablet - use auto flow */
     .creator-card:nth-child(n) {
         grid-column: auto;
         grid-row: auto;
+    }
+    
+    .creators__header {
+        margin-top: 40px; /* Matched to home page tablet spacing */
+        margin-bottom: 35px; /* Matched to home page tablet spacing */
     }
     
     .creators__header h1 {
@@ -751,7 +764,7 @@ main {
     }
     
     .creator-card {
-        padding: 20px 15px;
+        padding: 20px 25px; /* Adjusted padding for tablet */
         margin: 0 10px;
     }
     
@@ -890,7 +903,12 @@ main {
         margin: 0 8px;
     }
     
-    /* Creators page mobile adjustments */
+    /* Creators page mobile adjustments - THINNER BOXES */
+    .creators__header {
+        margin-top: 30px; /* Matched to home page mobile spacing */
+        margin-bottom: 25px; /* Matched to home page mobile spacing */
+    }
+    
     .creators__header h1 {
         font-size: 1.8rem;
     }
@@ -901,7 +919,7 @@ main {
     
     .creators__grid {
         grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 25px;
+        gap: 20px; /* Reduced gap for mobile */
         padding: 0 10px;
     }
     
@@ -912,7 +930,8 @@ main {
     }
     
     .creator-card {
-        padding: 20px 15px;
+        padding: 20px 15px; /* THINNER: Reduced horizontal padding for mobile */
+        min-width: auto; /* Remove minimum width on mobile */
     }
     
     .creator-image img {
