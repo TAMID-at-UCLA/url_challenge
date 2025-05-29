@@ -11,19 +11,32 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 # autocommit=True means we don't have to call conn.commit() after each INSERT/UPDATE
 # conn = psycopg2.connect(DATABASE_URL)
 # conn.autocommit = True
-
 # instead, create a pool of reusable connections
+
+
 pool = ThreadedConnectionPool(minconn=1, maxconn=10, dsn=DATABASE_URL)
 
 def with_conn(fn):
+    """
+    Simple decorator to handle database connections:
+    1. Grab a connection from the pool.
+    2. Give you a cursor to run your queries.
+    3. Commit any changes.
+    4. Return the connection back to the pool.
+    """
     def wrapper(*args, **kwargs):
+        # 1. Take a connection from the pool
         conn = pool.getconn()
         try:
+            # 2. Open a cursor so we can talk to the database
             with conn.cursor() as cur:
+                # Call your function with this cursor
                 result = fn(cur, *args, **kwargs)
+                # 3. Save changes (for INSERT/UPDATE)
                 conn.commit()
                 return result
         finally:
+            # 4. Give the connection back when done
             pool.putconn(conn)
     return wrapper
 
