@@ -1,6 +1,7 @@
 import os, random, string
 import psycopg2
 from dotenv import load_dotenv
+from psycopg2.pool import ThreadedConnectionPool
 
 # Load environment variables from .env (so DATABASE_URL is set)
 load_dotenv()
@@ -8,67 +9,79 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Open a single global connection to the Postgres database
 # autocommit=True means we don't have to call conn.commit() after each INSERT/UPDATE
-conn = psycopg2.connect(DATABASE_URL)
-conn.autocommit = True
+# conn = psycopg2.connect(DATABASE_URL)
+# conn.autocommit = True
 
-def init_db():
+# instead, create a pool of reusable connections
+pool = ThreadedConnectionPool(minconn=1, maxconn=10, dsn=DATABASE_URL)
+
+def with_conn(fn):
+    def wrapper(*args, **kwargs):
+        conn = pool.getconn()
+        try:
+            with conn.cursor() as cur:
+                result = fn(cur, *args, **kwargs)
+                conn.commit()
+                return result
+        finally:
+            pool.putconn(conn)
+    return wrapper
+
+@with_conn
+def init_db(cur):
     """
     Create the `urls` table if it doesn't already exist.
     Reads and executes the SQL script in migrations/001_create_urls.sql.
     """
-    with conn.cursor() as cur:
-        cur.execute(open('migrations/001_create_urls.sql').read())
+    cur.execute(open('migrations/001_create_urls.sql').read())
 
-def create_slug(target_url):
+@with_conn
+def create_slug(cur, target_url):
     """
     Return an existing slug for target_url if one exists;
     otherwise generate a new unique slug, store it, and return it.
     """
 
     # Option 1: Look for an existing row (checking if it's a duplicate)
-    with conn.cursor() as cur:
-        cur.execute("SELECT slug FROM urls WHERE target = %s", (target_url,))
-        row = cur.fetchone()
-        if row:
-            return row[0]
+    cur.execute("SELECT slug FROM urls WHERE target = %s", (target_url,))
+    row = cur.fetchone()
+    if row:
+        return row[0]
 
 
     # Option 2: If no existing row exists matching the link, give a new slug/code
     while True:
         # Build a random 6-char string from letters+digits
         slug = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
-        with conn.cursor() as cur:
-            cur.execute(
-              "INSERT INTO urls (slug, target) VALUES (%s, %s) ON CONFLICT DO NOTHING",
-              (slug, target_url)
-            )
-            if cur.rowcount:  # If rowcount is 1, the INSERT worked and we can return this slug
-                return slug
+        cur.execute(
+          "INSERT INTO urls (slug, target) VALUES (%s, %s) ON CONFLICT DO NOTHING",
+          (slug, target_url)
+        )
+        if cur.rowcount:  # If rowcount is 1, the INSERT worked and we can return this slug
+            return slug
 
-def get_target(slug):
+@with_conn
+def get_target(cur, slug):
     """Look up a slug and return its target URL string (or None if not found)."""
-    with conn.cursor() as cur:
-        cur.execute("SELECT target FROM urls WHERE slug = %s", (slug,))
-        row = cur.fetchone()
+    cur.execute("SELECT target FROM urls WHERE slug = %s", (slug,))
+    row = cur.fetchone()
     return row[0] if row else None
 
-
-def increment_visits(slug):
+@with_conn
+def increment_visits(cur, slug):
     """Increment the visit counter for a given slug by 1; updates the 'visits' column"""
-    with conn.cursor() as cur:
-        cur.execute(
-            "UPDATE urls SET visits = visits + 1 WHERE slug = %s",
-            (slug,)
-        )
+    cur.execute(
+        "UPDATE urls SET visits = visits + 1 WHERE slug = %s",
+        (slug,)
+    )
 
-
-def get_stats(slug):
+@with_conn
+def get_stats(cur, slug):
     """
     Return (visits, created_at) for a given slug, or None if it doesn't exist.
     """
-    with conn.cursor() as cur:
-        cur.execute(
-            "SELECT visits, created_at FROM urls WHERE slug = %s",
-            (slug,)
-        )
-        return cur.fetchone()
+    cur.execute(
+        "SELECT visits, created_at FROM urls WHERE slug = %s",
+        (slug,)
+    )
+    return cur.fetchone()
