@@ -14,13 +14,13 @@ To ensure the project was scalable and maintainable, we followed a structured de
 
 2. **Backend Development**: We implemented routes to handle URL creation, redirection, and click tracking. We used a 'slug' to create unique short links and built in error-handling for robustness.
 
-3. **Frontend Design**: We developed a responsive user interface using HTML, CSS, and JavaScript. The design prioritized clarity, mobile responsiveness, and seamless integration with the backend.
+3. **Frontend Design**: We developed a responsive user interface using HTML, CSS, and JavaScript. The design prioritized clarity, mobile responsiveness, and seamless integration with the backend. Furthermore, the frontend section is made in such a way that the browser data is saved so that users can refresh and still see on our site their previous history of their long links and their short counterparts.
 
-4. **Database Integration**: Supabase allowed us to persistently store long URLs, their associated short forms, and the click activity. We structured our tables to avoid duplication and ensure fast lookups.
+5. **Database Integration**: Supabase allowed us to persistently store long URLs, their associated short forms, and the click activity. We structured our tables to avoid duplication and ensure fast lookups.
 
-5. **Deployment**: We deployed the app on Render, managing environment variables, database connections, and remote testing to ensure public access.
+6. **Deployment**: We deployed the app on Render, managing environment variables, database connections, and remote testing to ensure public access.
 
-6. **Testing & Iteration**: We tested all routes and features locally and in production. Final tweaks focused on improving UI behavior and input handling.
+7. **Testing & Iteration**: We tested all routes and features locally and in production. Final tweaks focused on improving UI behavior and input handling.
 
 Throughout the project, we used Git and GitHub for collaboration, pull requests, and issue tracking.
 
